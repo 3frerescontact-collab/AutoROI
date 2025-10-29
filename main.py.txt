@@ -1,0 +1,98 @@
+import os
+import logging
+from dotenv import load_dotenv
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ContextTypes
+
+# Charger les variables d'environnement
+load_dotenv()
+TOKEN = os.getenv("TELEGRAM_TOKEN")
+CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+
+# Activer les logs
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+
+# Stockage des critères par défaut
+user_criteria = {
+    "marque": "BMW",
+    "modele": "530d",
+    "prix_max": 25000,
+    "annee_min": 2017,
+    "km_max": 120000,
+    "frais_import": 1500,
+    "frais_vente": 500
+}
+
+# -----------------------
+# Fonctions principales
+# -----------------------
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Démarre le bot"""
+    await update.message.reply_text(
+        f"🚗 Bonjour M. Garin,\nBienvenue sur AutoROI.\n\n"
+        f"Utilisez /menu pour modifier vos critères.\n"
+        f"Utilisez /runonce pour voir les 10 meilleures annonces simulées."
+    )
+
+async def show_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Affiche le menu principal"""
+    keyboard = [
+        [InlineKeyboardButton("Marque", callback_data="edit_marque"),
+         InlineKeyboardButton("Modèle", callback_data="edit_modele")],
+        [InlineKeyboardButton("Prix max (€)", callback_data="edit_prix"),
+         InlineKeyboardButton("Année min", callback_data="edit_annee")],
+        [InlineKeyboardButton("Km max", callback_data="edit_km")],
+        [InlineKeyboardButton("Frais import (€)", callback_data="edit_import"),
+         InlineKeyboardButton("Frais vente (€)", callback_data="edit_vente")],
+        [InlineKeyboardButton("✅ Voir annonces simulées", callback_data="show_ads")]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    await update.message.reply_text("⚙️ Choisissez un critère à modifier :", reply_markup=reply_markup)
+
+# -----------------------
+# Édition des critères
+# -----------------------
+import os
+import logging
+from dotenv import load_dotenv
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ContextTypes
+
+# Charger les variables d'environnement
+load_dotenv()
+TOKEN = os.getenv("TELEGRAM_TOKEN")
+CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+
+# Activer les logs
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+
+# Stockage des critères par défaut
+user_criteria = {
+    "marque": "BMW",
+    "modele": "530d",
+    "prix_max": 25000,
+    "annee_min": 2017,
+    "km_max": 120000,
+    "frais_import": 1500,
+    "frais_vente": 500
+}
+
+# -----------------------
+# Fonctions principales
+# -----------------------
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Démarre le bot"""
+    await update.message.reply_text(
+        f"🚗 Bonjour M. Garin,\nBienvenue sur AutoROI.\n\n"
+        f"Utilisez /menu pour modifier vos critères.\n"
+        f"Utilisez /runonce pour voir les 10 meilleures annonces simulées."
+    )
+
+async def show_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Affiche le menu principal"""
+    keyboard = [
+        [InlineKeyboardButton("Marque", callback_data="edit_marque"),
+         InlineKeyboardButton("Modèle", callback_data="edit_modele")],
+        [InlineKeyboardButton("Prix max (€)",]()
